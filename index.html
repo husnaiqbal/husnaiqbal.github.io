@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Husna Iqbal — Portfolio</title>
-<meta name="description" content="Husna Iqbal — Power Platform Administrator &amp; IT/Project Management Portfolio">
+<title>Husna Iqbal · Portfolio</title>
+<meta name="description" content="Husna Iqbal · Power Platform Administrator &amp; IT/Project Management Portfolio">
 <style>
   :root {
     --ink: #1c2430;
@@ -14,9 +14,6 @@
     --border: #e3ddd3;
     --accent: #1f5f5b;
     --accent-soft: #e8f1f0;
-    --todo-bg: #fff6e0;
-    --todo-border: #d9a441;
-    --todo-text: #8a5c00;
     --radius: 10px;
     --maxw: 860px;
   }
@@ -92,7 +89,23 @@
     padding: 72px 24px 56px;
     border-bottom: 1px solid var(--border);
   }
-  .hero .wrap { padding: 0; }
+  .hero .wrap {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: space-between;
+  }
+  .hero-text { flex: 1; min-width: 280px; }
+  .hero-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--card);
+    box-shadow: 0 10px 32px rgba(15, 27, 61, 0.2);
+    flex-shrink: 0;
+  }
   .eyebrow {
     text-transform: uppercase;
     letter-spacing: 1.2px;
@@ -156,12 +169,20 @@
     margin: 0 0 8px;
     letter-spacing: -0.3px;
   }
+  h3.subsection-title {
+    font-size: 18px;
+    margin: 32px 0 14px;
+    letter-spacing: -0.2px;
+    color: var(--accent);
+  }
+  h3.subsection-title:first-of-type { margin-top: 8px; }
   .section-intro {
     color: var(--ink-soft);
     margin: 0 0 28px;
     max-width: 620px;
     font-size: 15px;
   }
+  .about-para { margin: 0 0 14px; }
 
   /* About */
   .skills-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
@@ -216,6 +237,15 @@
   details[open] .chevron { transform: rotate(45deg); }
 
   .card-body { padding: 0 22px 22px; border-top: 1px solid var(--border); }
+  .one-line-summary {
+    border: 1.5px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 12px 16px !important;
+    margin: 16px 0 4px !important;
+    font-weight: 600;
+    color: var(--ink) !important;
+  }
   .card-body h4 {
     font-size: 13px;
     text-transform: uppercase;
@@ -223,34 +253,145 @@
     color: var(--accent);
     margin: 20px 0 8px;
   }
-  .card-body p { margin: 0 0 10px; color: var(--ink); font-size: 15px; }
-  .card-body ul { margin: 0 0 10px; padding-left: 20px; }
-  .card-body li { margin-bottom: 6px; font-size: 15px; }
-  .skills-line { font-size: 14px; color: var(--ink-soft); }
-
-  /* TODO markers */
-  .todo {
-    background: var(--todo-bg);
-    border: 1px dashed var(--todo-border);
-    color: var(--todo-text);
-    border-radius: 4px;
-    padding: 1px 6px;
-    font-size: 0.92em;
-    font-weight: 600;
+  .card-body p { margin: 10px 0; color: var(--ink); font-size: 15px; }
+  .card-body ul { margin: 8px 0 4px; padding-left: 20px; }
+  .card-body li { margin-bottom: 7px; font-size: 15px; }
+  .skills-line { font-size: 13px; color: var(--ink-soft); margin-top: 14px !important; }
+  .card-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 14px 0 4px;
+    display: block;
+    cursor: zoom-in;
   }
-  .todo::before {
-    content: "TODO: ";
-    font-size: 0.85em;
-    letter-spacing: 0.3px;
+  .card-img-caption {
+    font-size: 12px;
+    color: #9aa0a6;
+    margin: 6px 0 14px !important;
+  }
+
+  /* Carousel (one image at a time, scrollable) */
+  .carousel {
+    position: relative;
+    margin: 14px 0 4px;
+  }
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track img {
+    flex: 0 0 100%;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    scroll-snap-align: start;
+    cursor: zoom-in;
+    display: block;
+  }
+  /* Screenshots with mixed aspect ratios (e.g. FIFA dashboard) should be shown in full, not cropped */
+  .carousel-track.contain {
+    background: #f3f4f2;
+  }
+  .carousel-track.contain img {
+    aspect-ratio: auto;
+    height: 380px;
+    width: 100%;
+    object-fit: contain;
+  }
+  .car-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .car-btn:hover { background: #fff; }
+  .car-prev { left: 10px; }
+  .car-next { right: 10px; }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 16, 26, 0.88);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  #lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  /* External link button inside cards */
+  .live-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: #fff;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 4px 0 14px;
+  }
+  .live-link:hover { opacity: 0.9; }
+
+  .note-box {
+    background: #f4f6f4;
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-radius: 4px;
+    margin: 4px 0 14px;
   }
 
   /* Footer */
   footer.contact {
     padding: 48px 24px 60px;
     text-align: center;
+    background: var(--accent-soft);
+    border-top: 1px solid var(--border);
   }
-  footer.contact h2 { font-size: 24px; margin: 0 0 10px; }
-  footer.contact p { color: var(--ink-soft); margin: 0 0 22px; }
+  footer.contact h2 { font-size: 24px; margin: 0 0 10px; color: var(--ink); }
+  footer.contact p { color: var(--ink); margin: 0 0 22px; }
   footer.contact .btn { margin: 0 6px; }
   .footer-fine {
     margin-top: 40px;
@@ -261,6 +402,8 @@
   @media (max-width: 640px) {
     .nav-links { display: none; }
     .hero { padding: 56px 20px 40px; }
+    .hero .wrap { flex-direction: column-reverse; text-align: left; }
+    .hero-photo { width: 220px; height: 220px; }
     section.block { padding: 44px 20px; }
   }
 </style>
@@ -277,43 +420,50 @@
       <a href="#data-analytics">Data &amp; Analytics</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="Husna-Iqbal-Resume.pdf" class="nav-cta" download>Resume</a>
   </div>
 </header>
 
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">IT &amp; Project Management Portfolio</p>
-    <h1 class="hero-title">Husna Iqbal</h1>
-    <p class="hero-role">Microsoft 365 Power Platform Administrator · MBA Candidate, University of Tennessee — Knoxville</p>
-    <p class="hero-desc">
-      I build and run the systems that IT and business teams rely on day to day — Power Platform applications,
-      automated workflows, and the process frameworks and data migrations that keep large organizations running
-      smoothly. This portfolio walks through a few of those projects in detail.
-    </p>
-    <div class="hero-actions">
-      <a href="#power-platform" class="btn btn-primary">View my work</a>
-      <a href="Husna-Iqbal-Resume.pdf" class="btn btn-secondary" download>Download Résumé</a>
+    <div class="hero-text">
+      <p class="eyebrow">IT &amp; Project Management Portfolio</p>
+      <h1 class="hero-title">Husna Iqbal</h1>
+      <p class="hero-role">Microsoft 365 Power Platform Administrator · MBA Candidate, University of Tennessee, Knoxville</p>
+      <p class="hero-desc">
+        Welcome to my digital portfolio! I create and maintain the systems that IT and business teams rely on
+        day to day whether that's Power Platform applications, automated workflows, or the process frameworks
+        and guides that keep organizations running smoothly. This portfolio walks through a few of those
+        projects and includes mockups of any apps I've built using fake data.
+      </p>
+      <div class="hero-actions">
+        <a href="#power-platform" class="btn btn-primary">View my work</a>
+        <a href="Husna-Iqbal-Resume.pdf" class="btn btn-secondary" download>Download Resume</a>
+      </div>
+      <div class="contact-row">
+        <a href="mailto:iqbalhusna24@gmail.com">iqbalhusna24@gmail.com</a>
+        <a href="https://www.linkedin.com/in/husnaiqbal" target="_blank" rel="noopener">LinkedIn</a>
+        <span>Knoxville, Tennessee</span>
+      </div>
     </div>
-    <div class="contact-row">
-      <a href="mailto:iqbalhusna24@gmail.com">iqbalhusna24@gmail.com</a>
-      <a href="https://www.linkedin.com/in/husnaiqbal" target="_blank" rel="noopener">LinkedIn</a>
-      <span>Knoxville, Tennessee</span>
-    </div>
+    <img class="hero-photo" src="images/husna-headshot.jpg" alt="Husna Iqbal">
   </div>
 </section>
 
 <section class="block" id="about">
   <div class="wrap">
-    <h2 class="section-title">About</h2>
-    <p class="section-intro" style="margin-bottom:0;">
+    <h2 class="section-title">A little more about me...</h2>
+    <p class="about-para section-intro" style="margin-bottom:14px;">
       I currently administer the Microsoft 365 Power Platform ecosystem for Knoxville Utilities Board (KUB),
-      supporting over 1,400 users — building Power Apps, Power Automate flows, and Power BI dashboards that
-      automate processes and surface real-time operational insight. Before that role, I helped implement a new
-      facilities and asset management system, standing up QA/QC and asset management frameworks from scratch.
-      I'm pursuing an MBA at the Haslam College of Business, concentrating in information management, and I'm
-      looking for IT and project management roles where I can keep building systems and processes that make
-      organizations run better.
+      supporting over 1,400 users while also building Power Apps, Power Automate flows, and Power BI dashboards
+      that automate processes. Before this role, I helped implement a new SaaS solution for facilities that
+      tracks assets, capital, and operational work. There, I made sure to stand up quality control and efficient
+      asset management frameworks for assets ranging from generators and water towers to HVAC systems and more.
+    </p>
+    <p class="about-para section-intro" style="margin-bottom:0;">
+      I've always been driven to keep learning and growing, and that's what led me to the Haslam College of
+      Business for my MBA! Here I've been learning how to look at business holistically and better understanding
+      how different departments work and support one another, while also filling in knowledge gaps in finance
+      along the way.
     </p>
     <div class="skills-chip-row">
       <span class="chip">Power Apps</span>
@@ -322,10 +472,13 @@
       <span class="chip">SharePoint / M365 Admin</span>
       <span class="chip">SQL</span>
       <span class="chip">Python</span>
+      <span class="chip">R</span>
       <span class="chip">Tableau</span>
       <span class="chip">ShareGate</span>
       <span class="chip">Process Design &amp; QA/QC</span>
       <span class="chip">Visio</span>
+      <span class="chip">Excel</span>
+      <span class="chip">Project Management</span>
     </div>
   </div>
 </section>
@@ -334,44 +487,28 @@
 <section class="block" id="power-platform">
   <div class="wrap">
     <h2 class="section-title">Power Platform Build Showcase</h2>
-    <p class="section-intro">Three Power Platform solutions I've built and supported at KUB — click any card to expand.</p>
+    <p class="section-intro">Three Power Platform solutions I've built and supported. Feel free to click any card to expand and use the arrows to browse screenshots!</p>
 
     <details class="card" open>
       <summary>
         <div class="summary-text">
           <p class="summary-title">Fleet Reservation Portal</p>
-          <p class="summary-line">Power Apps + Power Automate · Built end to end</p>
+          <p class="summary-line">Power Apps + Power Automate</p>
         </div>
         <span class="chevron">+</span>
       </summary>
       <div class="card-body">
-        <p>A Power Apps and Power Automate solution that lets KUB employees reserve company vehicles and gives the Transportation department a centralized way to manage requests and vehicle availability.</p>
+        <p class="one-line-summary">Lets employees browse and reserve available company vehicles in an app instead of calling the transportation department.</p>
 
-        <h4>Problem</h4>
-        <p>Reserving a company vehicle relied on manual, ad hoc coordination — phone calls, emails, or in-person requests with no shared view of availability. This created scheduling conflicts, slow turnaround, and extra administrative overhead for Transportation staff manually tracking availability.</p>
+        <img class="card-img" src="images/fleet-mockup-2.png" onclick="openLightbox(this.src)" alt="Vehicle Checkout screen mockup showing available vehicles and a reservation form">
+        <p class="card-img-caption">Recreated mockup: company branding, names, and data shown are placeholders.</p>
 
-        <h4>My role</h4>
-        <p>Designed and built the solution end to end as the Power Platform Administrator, working directly with the Transportation department to map their process and translate it into an automated system.</p>
-
-        <h4>What I built</h4>
         <ul>
-          <li>A Power Apps front end where employees browse vehicle availability and submit reservation requests</li>
-          <li>Power Automate flows that route requests to Transportation for review, update vehicle availability in real time upon approval, and send confirmation notifications</li>
-          <li>A backend data structure (SharePoint/Dataverse) tracking vehicle inventory, reservation status, and history</li>
+          <li>Replaced manual phone/email booking with self-service reservations and real-time vehicle availability</li>
+          <li>Power Apps front end, Power Automate approval routing, SharePoint backend</li>
+          <li>Cut reservation turnaround from 2-3 business days to about 1 hour</li>
+          <li>Used by 150+ employees across 15 departments since launch</li>
         </ul>
-
-        <h4>Workflow</h4>
-        <p>Employee submits a reservation request → system checks real-time availability → request routes to Transportation for approval → vehicle status updates automatically → employee receives confirmation.</p>
-
-        <h4>Impact</h4>
-        <ul>
-          <li>Eliminated manual back-and-forth between employees and Transportation staff</li>
-          <li>Gave Transportation a single, real-time view of fleet availability instead of manually tracked records</li>
-          <li>Reduced reservation turnaround time from <span class="todo">X hours/days to X</span></li>
-          <li>Used by <span class="todo">X employees across X departments</span> since launch</li>
-        </ul>
-
-        <p class="skills-line"><strong>Skills:</strong> Power Apps, Power Automate, requirements gathering, stakeholder collaboration, process automation, data modeling</p>
       </div>
     </details>
 
@@ -379,40 +516,28 @@
       <summary>
         <div class="summary-text">
           <p class="summary-title">IT Access Request Hub</p>
-          <p class="summary-line">Power Apps + Power Automate + ticketing system integration · Built end to end</p>
+          <p class="summary-line">Power Apps + Power Automate + ManageEngine integration</p>
         </div>
         <span class="chevron">+</span>
       </summary>
       <div class="card-body">
-        <p>An organization-wide Power Apps solution that lets any KUB employee request access to business systems (HRIS, FMS, GIS, and others), automatically routes the request to the right system owner, and creates a corresponding ticket in the IT ticketing system — with full status visibility for the requester.</p>
+        <p class="one-line-summary">One form to request access to any business system, automatically routed, ticketed, and trackable.</p>
 
-        <h4>Problem</h4>
-        <p>Requesting system access had no standard entry point — requests came in inconsistently across teams, with no unified way to route them, track status, or guarantee they were captured in the ticketing system. This caused delays, dropped requests, and confusion over ownership.</p>
+        <div class="carousel">
+          <button class="car-btn car-prev" onclick="carouselNav(this,-1)" aria-label="Previous image">‹</button>
+          <div class="carousel-track">
+            <img src="images/access-hub-1.png" onclick="openLightbox(this.src)" alt="Application Request Form mockup for requesting access to a business system">
+            <img src="images/access-hub-2.png" onclick="openLightbox(this.src)" alt="Application Request Form mockup showing a list of past requests and their status">
+          </div>
+          <button class="car-btn car-next" onclick="carouselNav(this,1)" aria-label="Next image">›</button>
+        </div>
+        <p class="card-img-caption">Recreated mockups: names and requests shown are placeholders.</p>
 
-        <h4>My role</h4>
-        <p>Designed and built the solution end to end, including the routing logic and the integration with the ticketing system.</p>
-
-        <h4>What I built</h4>
         <ul>
-          <li>A Power Apps intake form where employees select the system they need access to (HRIS, FMS, GIS, and others) and submit a request</li>
-          <li>Power Automate flows that determine the correct owning team based on the system selected and route the request accordingly</li>
-          <li>An integration that automatically creates a corresponding ticket in the ticketing system — no manual re-entry required</li>
-          <li>In-app status tracking with a direct link from each request to its corresponding ticket</li>
-          <li>Automated notifications to the requester when their request is completed</li>
+          <li>Replaced inconsistent access request processes (HRIS, FMS, GIS, and more) with one standardized intake form</li>
+          <li>Built end to end: routing logic, ticketing system integration, and requester-facing status tracking</li>
+          <li>Organization-wide app representing 17+ systems</li>
         </ul>
-
-        <h4>Workflow</h4>
-        <p>Employee selects a system and submits a request → Power Automate determines the owning team and routes the request → a ticket is auto-created → the owning team processes it → requester is notified on completion and can click through to the live ticket at any time.</p>
-
-        <h4>Impact</h4>
-        <ul>
-          <li>Created a single, standardized front door for system access requests, replacing inconsistent team-by-team processes</li>
-          <li>Eliminated manual ticket creation for these requests entirely</li>
-          <li>Gave requesters self-service visibility into request status for the first time</li>
-          <li>Used organization-wide across <span class="todo">X departments and X connected systems</span>, processing approximately <span class="todo">X requests per month</span></li>
-        </ul>
-
-        <p class="skills-line"><strong>Skills:</strong> Power Apps, Power Automate, system integration, conditional routing logic, cross-team process design, organization-wide rollout</p>
       </div>
     </details>
 
@@ -420,34 +545,28 @@
       <summary>
         <div class="summary-text">
           <p class="summary-title">PPE Request &amp; Approval Workflow</p>
-          <p class="summary-line">Power App · Supported &amp; administered, not originally built by me</p>
+          <p class="summary-line">Power App · Supported &amp; administered</p>
         </div>
         <span class="chevron">+</span>
       </summary>
       <div class="card-body">
-        <p>An organization-wide Power App used by employees to request personal protective equipment (PPE), with department safety liaisons using the same app to review and approve or deny requests.</p>
+        <p class="one-line-summary">An org-wide, safety-critical app for requesting and approving PPE.</p>
 
-        <h4>My role</h4>
-        <p>I did not build this app originally — I support and maintain it as part of my Power Platform Administrator responsibilities. It's included here to show the operations side of this work, not just the build side.</p>
+        <div class="carousel">
+          <button class="car-btn car-prev" onclick="carouselNav(this,-1)" aria-label="Previous image">‹</button>
+          <div class="carousel-track">
+            <img src="images/ppe-1.png" onclick="openLightbox(this.src)" alt="Active PPE Requests admin list mockup with filters and approval statuses">
+            <img src="images/ppe-2.png" onclick="openLightbox(this.src)" alt="Individual employee PPE request history mockup">
+          </div>
+          <button class="car-btn car-next" onclick="carouselNav(this,1)" aria-label="Next image">›</button>
+        </div>
+        <p class="card-img-caption">Recreated mockups: names, IDs, and requests shown are placeholders.</p>
 
-        <h4>What I do</h4>
         <ul>
-          <li>Ongoing platform administration: user access, licensing, and configuration support across the organization</li>
-          <li>Troubleshoot workflow issues for both requesters and department liaisons</li>
-          <li>Support enhancements and fixes in coordination with the safety team</li>
-          <li>Ensure the app stays reliable and available for organization-wide use</li>
+          <li>Own ongoing administration: access, configuration, and troubleshooting for requestors and safety employees</li>
+          <li>Support enhancements in coordination with the safety team</li>
+          <li>Keep a safety-critical approval workflow reliable organization-wide</li>
         </ul>
-
-        <h4>Workflow</h4>
-        <p>Employee submits a PPE request → request routes to the appropriate department liaison → liaison approves or denies within the app → requester is notified of the outcome.</p>
-
-        <h4>Impact</h4>
-        <ul>
-          <li>Kept a safety-critical, organization-wide tool running reliably for <span class="todo">X employees across X departments</span></li>
-          <li>Reduced support burden on the safety team by resolving access and workflow issues directly</li>
-        </ul>
-
-        <p class="skills-line"><strong>Skills:</strong> Power Platform administration, application support, cross-functional coordination, troubleshooting</p>
       </div>
     </details>
   </div>
@@ -457,50 +576,9 @@
 <section class="block" id="process-improvement">
   <div class="wrap">
     <h2 class="section-title">Process Improvement</h2>
-    <p class="section-intro">Two process-design projects — one standardizing facilities operations during a system implementation, one coordinating an organization-wide SharePoint migration.</p>
+    <p class="section-intro">Two process-design projects: a SharePoint data migration and a facilities system implementation!</p>
 
     <details class="card" open>
-      <summary>
-        <div class="summary-text">
-          <p class="summary-title">QA/QC &amp; Asset Management Framework</p>
-          <p class="summary-line">New system implementation · Built from the ground up</p>
-        </div>
-        <span class="chevron">+</span>
-      </summary>
-      <div class="card-body">
-        <p>Built a QA/QC framework and an asset management framework from the ground up during a new system implementation, standardizing facilities project and operational work and enabling automated preventive maintenance scheduling across 60+ substations.</p>
-
-        <h4>Problem</h4>
-        <p>KUB was rolling out a new system for facilities and asset management, but there was no standardized way to ensure quality across facilities projects and operational work, and no structured framework for tracking assets or scheduling preventive maintenance. Contractors and internal teams also needed a consistent process to stay aligned throughout implementation.</p>
-
-        <h4>My role</h4>
-        <p>As Properties Student, I bridged communication between contractors and internal teams throughout the system implementation and owned the design of both frameworks from scratch.</p>
-
-        <h4>What I built</h4>
-        <ul>
-          <li>A QA/QC framework built from the ground up to standardize quality control across facilities projects and day-to-day operational work</li>
-          <li>An asset management framework within the new system, including utility-specific asset configurations and automated preventive maintenance schedules for over 60 substations</li>
-          <li>Automation of previously manual business processes within the new system</li>
-          <li>Reference guides and 10+ Visio workflow diagrams documenting the new standardized processes</li>
-        </ul>
-
-        <h4>Workflow</h4>
-        <p><strong>QA/QC:</strong> define quality standards → apply standardized checklist/review criteria → document and sign off → feed findings back into process refinement.</p>
-        <p><strong>Asset management:</strong> configure asset with utility-specific attributes → classify and assign to hierarchy/substation → attach automated preventive maintenance schedule → system triggers maintenance on schedule.</p>
-
-        <h4>Impact</h4>
-        <ul>
-          <li>Standardized quality control across facilities projects and operational work for the first time</li>
-          <li>Automated preventive maintenance scheduling across 60+ substations, removing reliance on manual tracking</li>
-          <li>Gave contractors and internal teams a shared, documented process during a major system implementation</li>
-          <li>Produced 10+ Visio workflows and reference guides that became standard training documentation</li>
-        </ul>
-
-        <p class="skills-line"><strong>Skills:</strong> Process design, QA/QC, asset management systems, preventive maintenance planning, Visio documentation, contractor coordination, change management</p>
-      </div>
-    </details>
-
-    <details class="card">
       <summary>
         <div class="summary-text">
           <p class="summary-title">SharePoint Data Migration</p>
@@ -509,33 +587,38 @@
         <span class="chevron">+</span>
       </summary>
       <div class="card-body">
-        <p>Designed the overarching, cross-departmental process for KUB's organization-wide SharePoint data migration across 35+ departments, and authored the technical sub-processes for executing migrations using ShareGate — while enforcing least-privilege access controls throughout.</p>
+        <p class="one-line-summary">Designed and coordinated the process behind a 35+ department SharePoint data migration.</p>
 
-        <h4>Problem</h4>
-        <p>Migrating content into a new SharePoint architecture across 35+ departments needed real coordination to avoid missed content, inconsistent execution, and access control gaps. Without a defined process, a migration at this scale risked delays, rework, and inconsistent permissions.</p>
+        <img class="card-img" src="images/sharepoint-migration-process.png" onclick="openLightbox(this.src)" alt="Sample data migration process flowchart covering pre-migration checks, access and permissions, running the migration, and post-migration cleanup">
+        <p class="card-img-caption">Generic recreation of the migration process flow. Reflects the structure of the real process, not real system names.</p>
 
-        <h4>My role</h4>
-        <p>Supported SharePoint architecture planning and led process design for the migration: created the overarching cross-departmental process to keep it on track, and separately documented the technical sub-processes for running migrations with ShareGate.</p>
-
-        <h4>What I built</h4>
         <ul>
-          <li>A cross-departmental migration roadmap covering department sequencing, engagement, milestones, and status tracking</li>
-          <li>Technical sub-process documentation for ShareGate, covering source-to-destination mapping, permission mapping, migration execution, and validation</li>
-          <li>Least-privilege access control standards enforced as part of the migration, rather than permissions carrying over by default</li>
+          <li>Built the cross-departmental roadmap that kept 35+ departments on track, plus the technical playbook for running each migration</li>
+          <li>Enforced least-privilege access as part of the process itself</li>
+          <li>Executed safe data migrations for several departments</li>
+          <li>Scaled across 30+ departments and ~10 TB of content over 8 months</li>
         </ul>
+      </div>
+    </details>
 
-        <h4>Workflow</h4>
-        <p>Department intake and prioritization → content assessment and scoping → migration executed per the ShareGate sub-process → permissions validated against least-privilege standards → department sign-off → tracking updated, next department queued.</p>
+    <details class="card">
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">Facilities SaaS Solution Implementation &amp; Process Design</p>
+          <p class="summary-line">SaaS solution implementation · Built from the ground up</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">Integrated several processes into the new system, from capital and operational work to quality control and asset management frameworks, built from scratch.</p>
 
-        <h4>Impact</h4>
         <ul>
-          <li>Kept a 35+ department, organization-wide migration on track using a repeatable, documented process</li>
-          <li>Gave the team a standardized technical procedure for ShareGate, reducing errors and rework</li>
-          <li>Enforced least-privilege access controls consistently across the environment</li>
-          <li>Migration scaled across <span class="todo">X departments and X GB/TB of content over X months</span></li>
+          <li>Bridged contractors and internal teams throughout the implementation</li>
+          <li>Trained non-technical contractor technicians on technical processes using the new SaaS solution</li>
+          <li>Built a QA/QC framework standardizing facilities project and operational work</li>
+          <li>Built an asset management framework with automated preventive maintenance now covering 60+ substations</li>
+          <li>Delivered 10+ Visio workflows and reference guides that became the standard training material</li>
         </ul>
-
-        <p class="skills-line"><strong>Skills:</strong> Project management, cross-departmental coordination, process design at scale, technical documentation, SharePoint architecture, ShareGate, access governance</p>
       </div>
     </details>
   </div>
@@ -545,7 +628,162 @@
 <section class="block" id="data-analytics">
   <div class="wrap">
     <h2 class="section-title">Data &amp; Analytics</h2>
-    <p class="section-intro">Dashboards and technical projects spanning Power BI, Tableau, Python, and SQL.</p>
+    <p class="section-intro">Dashboards and technical projects spanning Power BI, Tableau, Python, R, and SQL.</p>
+
+    <h3 class="subsection-title">Power BI Dashboards</h3>
+
+    <details class="card" open>
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">IT Service Desk &amp; Operations Metrics Dashboard</p>
+          <p class="summary-line">Power BI · Built and maintained at organization</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">Real-time view of service desk calls, requests, releases, and outages for IT leadership.</p>
+
+        <img class="card-img" src="images/it-service-desk-dashboard.png" onclick="openLightbox(this.src)" alt="IT Service & Release Dashboard in Power BI showing calls to service desk, requests closed, releases deployed, and IT system outages">
+        <p class="card-img-caption">Mockup with sample data, reflecting the real dashboard's layout and metrics.</p>
+
+        <ul>
+          <li>Replaced monthly reporting with a live view IT leadership can check anytime</li>
+          <li>Tracks current vs. prior-week volume, resolution rate, and outage downtime at a glance</li>
+          <li>Allows leadership to gauge budget needs based on work volume and other metrics</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">SharePoint Tenant Storage Metrics Dashboard</p>
+          <p class="summary-line">Power BI · Built and maintained at organization</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">Tracks tenant SharePoint storage so the organization can plan capacity, track costs, and monitor sites before hitting a quota.</p>
+
+        <img class="card-img" src="images/sharepoint-storage-dashboard.png" onclick="openLightbox(this.src)" alt="SharePoint Storage Tracker dashboard in Power BI showing current used storage, sites over quota, and top sites by storage">
+        <p class="card-img-caption">Mockup with sample data, reflecting the real dashboard's layout and metrics.</p>
+
+        <ul>
+          <li>Surfaces sites over or nearing quota, plus month-over-month growth trends</li>
+          <li>Supports capacity planning during the 35+ department SharePoint migration</li>
+          <li>Pinpoints high-usage or inactive sites that are incurring unnecessary costs</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">Ticketing System Request Insights by Team</p>
+          <p class="summary-line">Power BI · Built and maintained at KUB</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">Gives each IT team self-service visibility into their own ticket workload and metrics.</p>
+
+        <div class="carousel">
+          <button class="car-btn car-prev" onclick="carouselNav(this,-1)" aria-label="Previous image">‹</button>
+          <div class="carousel-track">
+            <img src="images/ticketing-insights-1.png" onclick="openLightbox(this.src)" alt="Requests Overview page showing open, on hold, and closed tickets, percent resolved under 24 hours, and ticket volume by team">
+            <img src="images/ticketing-insights-2.png" onclick="openLightbox(this.src)" alt="Request Details drill-through page for a specific team">
+          </div>
+          <button class="car-btn car-next" onclick="carouselNav(this,1)" aria-label="Next image">›</button>
+        </div>
+        <p class="card-img-caption">Mockup with sample data, reflecting the real dashboard's layout and metrics.</p>
+        <div class="note-box">Heads up: the drill-through screenshot shows individual requestor/technician names and ticket subject lines. Worth confirming with KUB that's okay to publish before this goes live; happy to swap in a trimmed version if not.</div>
+
+        <ul>
+          <li>Two-page report: overview plus a team-level drill-through showing a list of tickets</li>
+          <li>Filterable by date range and team, with additional drill-throughs for technician workload and category</li>
+          <li>Replaced manually compiled team reports with a self-service view</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">Utility Emergency Level Dashboard</p>
+          <p class="summary-line">Power BI · Built and maintained at organization</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">One real-time, org-wide view of the organization's emergency status, overall and by utility.</p>
+
+        <img class="card-img" src="images/emergency-level-dashboard.png" onclick="openLightbox(this.src)" alt="Emergency Utility Levels dashboard in Power BI showing an overall emergency level gauge and per-utility status tiles">
+        <p class="card-img-caption">Mockup with sample data, reflecting the real dashboard's layout and metrics.</p>
+
+        <ul>
+          <li>Replaces manual email/verbal updates with one authoritative status, from 5 (Normal) to 1 (Catastrophic)</li>
+          <li>Breaks status out by utility (electric, gas, water, wastewater, fiber) with active condition notes</li>
+          <li>Displayed on monitors org-wide and embedded across SharePoint sites automatically</li>
+        </ul>
+      </div>
+    </details>
+
+    <h3 class="subsection-title">Other Technical Projects</h3>
+
+    <details class="card" open>
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">Movie Recommendation Generator</p>
+          <p class="summary-line">R (Shiny + arules) · Live app</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">A live R Shiny app that recommends movies using the same technique behind "customers who bought this also bought…"</p>
+
+        <img class="card-img" src="images/movie-rec-1.png" onclick="openLightbox(this.src)" alt="Movie Recommendation Generator app showing input controls and a results table of recommended movies">
+        <p class="card-img-caption">Live results table from the app.</p>
+
+        <ul>
+          <li>Tunable by confidence, obscurity, genre, minimum rating, and release year</li>
+          <li>Sortable, searchable results table with confidence score, rating, genre, and year</li>
+          <li>Deployed and publicly accessible on shinyapps.io</li>
+        </ul>
+
+        <a class="live-link" href="https://husnaiqbal.shinyapps.io/MovieRecs/" target="_blank" rel="noopener">Try the live app →</a>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <div class="summary-text">
+          <p class="summary-title">FIFA World Cup Performance Insights Dashboard</p>
+          <p class="summary-line">Python (Pandas, Dash + Plotly) · Undergrad project</p>
+        </div>
+        <span class="chevron">+</span>
+      </summary>
+      <div class="card-body">
+        <p class="one-line-summary">An interactive Python app for exploring 2022 FIFA World Cup match data, built with live callbacks.</p>
+
+        <div class="carousel">
+          <button class="car-btn car-prev" onclick="carouselNav(this,-1)" aria-label="Previous image">‹</button>
+          <div class="carousel-track contain">
+            <img src="images/fifa-1.png" onclick="openLightbox(this.src)" alt="FIFA Data Dashboard showing a head-to-head goals comparison between Mexico and Saudi Arabia">
+            <img src="images/fifa-2.png" onclick="openLightbox(this.src)" alt="Analyze Matches and Corresponding Stats view comparing goal preventions between two teams">
+            <img src="images/fifa-3.png" onclick="openLightbox(this.src)" alt="Team match history view showing England's results over time">
+            <img src="images/fifa-4.png" onclick="openLightbox(this.src)" alt="FIFA Goals Choropleth Map shading countries by total goals scored">
+          </div>
+          <button class="car-btn car-next" onclick="carouselNav(this,1)" aria-label="Next image">›</button>
+        </div>
+        <p class="card-img-caption">Live screenshots of the app: head-to-head comparison, stat analyzer, team match history, and the goals choropleth map.</p>
+
+        <ul>
+          <li>Head-to-head team comparisons across 11 stats (goals, passes, cards, fouls, and more)</li>
+          <li>Team match-history timeline and a "who won" bar chart generator</li>
+          <li>A choropleth map shading every country by total goals scored</li>
+        </ul>
+      </div>
+    </details>
 
     <details class="card">
       <summary>
@@ -556,112 +794,39 @@
         <span class="chevron">+</span>
       </summary>
       <div class="card-body">
-        <p>An interactive Tableau dashboard analyzing <span class="todo">membership, race participation, and/or performance</span> data for the Knoxville Track Club, built as an MBA analytics course project.</p>
-        <h4>Purpose</h4>
-        <p><span class="todo">Describe the business question this was built to answer — e.g., club leadership wanted visibility into membership trends, event participation, or race performance to guide programming decisions</span></p>
-        <h4>What I built</h4>
+        <p class="one-line-summary">Demonstrates which races actually drive the Knoxville Track Club's mission and finances.</p>
+
+        <img class="card-img" src="images/track-club-dashboard.png" onclick="openLightbox(this.src)" alt="Knoxville Track Club Performance dashboard in Tableau showing revenue growth, participant growth, operating margin, and race-level breakdowns">
+        <p class="card-img-caption">Mockup with sample data, reflecting the real dashboard's layout and metrics.</p>
+
         <ul>
-          <li>A Tableau dashboard with <span class="todo">X views covering [key metrics]</span></li>
-          <li>Interactive filters allowing users to explore by <span class="todo">date range, event type, member segment, etc.</span></li>
+          <li>Quadrant chart plots participation against operating margin to flag races that are aligned with KTC's mission while being profitable</li>
+          <li>Net profit per participant compares races on efficiency, not just size</li>
+          <li>Surfaces races running at a loss so leadership can take action</li>
         </ul>
-        <h4>Approach</h4>
-        <p>Sourced and cleaned <span class="todo">data source</span>, built calculated fields for <span class="todo">key metrics</span>, and designed the dashboard for a non-technical audience (club leadership/board).</p>
-        <p class="skills-line"><strong>Skills:</strong> Tableau, data visualization, data cleaning, stakeholder-facing dashboard design</p>
       </div>
     </details>
 
     <details class="card">
       <summary>
         <div class="summary-text">
-          <p class="summary-title">IT Service Desk &amp; Operations Metrics Dashboard</p>
-          <p class="summary-line">Power BI · Built and maintained at KUB</p>
+          <p class="summary-title">Healing Horizons Minute Clinic: Database Design &amp; Implementation</p>
+          <p class="summary-line">SQL + ER modeling · Team project, INMT 342: Introduction to Database Systems</p>
         </div>
         <span class="chevron">+</span>
       </summary>
       <div class="card-body">
-        <p>A Power BI dashboard tracking service desk requests, calls, releases, and broader IT operational metrics at KUB, giving IT leadership real-time visibility instead of manually pulled reports.</p>
-        <h4>Purpose</h4>
-        <p>IT leadership needed a consolidated, real-time view of service desk volume and operational health instead of pulling data manually from separate systems for recurring reports.</p>
-        <h4>What it includes</h4>
-        <ul>
-          <li><span class="todo">Describe metrics shown — e.g., request volume/trends, call volume, average resolution time, release counts, backlog, SLA compliance</span></li>
-          <li><span class="todo">Describe breakdowns — by department, request type, priority, technician, etc.</span></li>
-        </ul>
-        <h4>My role</h4>
-        <p>Built and maintain this dashboard as part of my Power Platform Administrator responsibilities, sourcing data from <span class="todo">ticketing system, telephony system, etc.</span> and refreshing on <span class="todo">cadence</span>.</p>
-        <h4>Impact</h4>
-        <p>Used by <span class="todo">IT leadership / service desk managers</span> to monitor operational health; replaced manual reporting that previously took <span class="todo">X</span> to compile.</p>
-        <p class="skills-line"><strong>Skills:</strong> Power BI, DAX, data modeling, IT operations reporting, dashboard design for leadership audiences</p>
-      </div>
-    </details>
+        <p class="one-line-summary">A 20-table healthcare database with 7 SQL views answering real operational questions, built as part of a team.</p>
 
-    <details class="card">
-      <summary>
-        <div class="summary-text">
-          <p class="summary-title">SharePoint Tenant Storage Metrics Dashboard</p>
-          <p class="summary-line">Power BI · Built and maintained at KUB</p>
-        </div>
-        <span class="chevron">+</span>
-      </summary>
-      <div class="card-body">
-        <p>A Power BI dashboard tracking SharePoint tenant storage consumption across KUB's environment, supporting capacity planning and governance during and after the org-wide SharePoint migration.</p>
-        <h4>Purpose</h4>
-        <p>With 35+ departments migrating into a new SharePoint architecture, leadership needed visibility into storage consumption by site/department to manage capacity and licensing costs proactively.</p>
-        <h4>What it includes</h4>
-        <ul>
-          <li><span class="todo">Describe metrics shown — storage by site/department, growth trends, top consumers, quota thresholds/alerts</span></li>
-        </ul>
-        <h4>My role</h4>
-        <p>Built and maintain this dashboard as part of ongoing M365 governance and Power Platform Administrator responsibilities.</p>
-        <h4>Impact</h4>
-        <p>Supports proactive capacity planning and flags <span class="todo">departments approaching storage limits, unusual growth, etc.</span> before they become licensing or performance issues.</p>
-        <p class="skills-line"><strong>Skills:</strong> Power BI, M365/SharePoint administration, capacity planning, governance reporting</p>
-      </div>
-    </details>
+        <img class="card-img" src="images/healing-horizons-erd.jpg" onclick="openLightbox(this.src)" alt="Entity Relationship Diagram for the Healing Horizons Minute Clinic database, showing 20 tables including physicians, patients, drugs, pharmacies, appointments, and prescriptions">
+        <p class="card-img-caption">Full ER diagram (Crow's Foot notation), including subtype/supertype modeling for employee roles and drug classifications.</p>
 
-    <details class="card">
-      <summary>
-        <div class="summary-text">
-          <p class="summary-title">FIFA Player &amp; Team Analytics Web App</p>
-          <p class="summary-line">Python · Undergrad project · Interactive website</p>
-        </div>
-        <span class="chevron">+</span>
-      </summary>
-      <div class="card-body">
-        <p>A Python-built interactive website visualizing FIFA player and team data, letting users explore stats through interactive charts rather than static reports.</p>
-        <h4>Purpose</h4>
-        <p>Course project demonstrating an end-to-end data pipeline — from raw data to a deployed, interactive product — rather than a static analysis.</p>
-        <h4>What I built</h4>
         <ul>
-          <li><span class="todo">Describe the tech stack — e.g., pandas for data cleaning, Plotly/Dash or Flask + D3/Chart.js for the interactive front end</span></li>
-          <li>Interactive charts allowing users to <span class="todo">compare players, filter by team/league/attribute, etc.</span></li>
-          <li><span class="todo">If deployed, link it here. If not currently live, note it can be run locally or re-deployed.</span></li>
+          <li>Designed a 20-table schema modeling a multi-location clinic, including physicians, patients, pharmacy inventory, and prescriptions</li>
+          <li>Used subtype/supertype modeling for employee roles and drug classifications, with full constraints</li>
+          <li>Wrote SQL views for real business questions, including a controlled-substance monitoring report to flag at-risk patients</li>
+          <li>Contributed schema design and queries as part of a team</li>
         </ul>
-        <h4>Approach</h4>
-        <p>Cleaned and processed FIFA player/team stats data, designed chart types suited to comparison (<span class="todo">bar, scatter, radar charts</span>), and built the site logic to let users filter and select what to explore.</p>
-        <p class="skills-line"><strong>Skills:</strong> Python, data cleaning/wrangling, <span class="todo">framework used</span>, web deployment, interactive visualization design</p>
-      </div>
-    </details>
-
-    <details class="card">
-      <summary>
-        <div class="summary-text">
-          <p class="summary-title">Database Design &amp; SQL</p>
-          <p class="summary-line">ER modeling (Visio) + SQL · Undergrad project</p>
-        </div>
-        <span class="chevron">+</span>
-      </summary>
-      <div class="card-body">
-        <p>Designed a relational database schema, documented as an ER diagram in Visio, and wrote the accompanying SQL to build and query it, for <span class="todo">project topic/domain</span>.</p>
-        <h4>Purpose</h4>
-        <p><span class="todo">Describe the course/project scope — what the database was meant to model and why</span></p>
-        <h4>What I built</h4>
-        <ul>
-          <li>An ER diagram in Visio mapping <span class="todo">X entities</span> and their relationships</li>
-          <li>SQL scripts to create the schema (tables, keys, constraints)</li>
-          <li><span class="todo">Describe sample queries — joins, aggregations, or reports the SQL supported</span></li>
-        </ul>
-        <p class="skills-line"><strong>Skills:</strong> Database design, ER modeling, SQL, Visio, data architecture documentation</p>
       </div>
     </details>
   </div>
@@ -669,17 +834,39 @@
 
 <footer class="contact" id="contact">
   <div class="wrap">
-    <h2>Let's talk</h2>
-    <p>Open to IT and project management roles — happy to walk through any of these projects in more depth.</p>
+    <h2>Feel free to reach out to me!</h2>
+    <p>I'm happy to walk through any of these projects in more depth.</p>
     <a href="mailto:iqbalhusna24@gmail.com" class="btn btn-primary">Email Me</a>
     <a href="https://www.linkedin.com/in/husnaiqbal" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
-    <a href="Husna-Iqbal-Resume.pdf" class="btn btn-secondary" download>Résumé</a>
+    <a href="Husna-Iqbal-Resume.pdf" class="btn btn-secondary" download>Resume</a>
     <p class="footer-fine">© <span id="year"></span> Husna Iqbal</p>
   </div>
 </footer>
 
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+  <img id="lightbox-img" src="" alt="Enlarged view" onclick="event.stopPropagation()">
+</div>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function carouselNav(btn, dir) {
+    const track = btn.parentElement.querySelector('.carousel-track');
+    const width = track.clientWidth;
+    track.scrollBy({ left: dir * width, behavior: 'smooth' });
+  }
 </script>
 
 </body>
